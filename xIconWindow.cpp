@@ -34,14 +34,12 @@ const XRectangle WINDOW_RECT = {
     .width = 700, .height = 200
 };
 
-
 /**
  * Module globals.
  */
 Display* mDisplay;
 Window mIconWindow;
 xPngWrapper* mIconWrapper;
-
 
 /**
  * Module Entry.
@@ -54,10 +52,9 @@ int main(int argCount, char** argValues) {
             "command line." << COLOR_NORMAL << endl;
         return true;
     }
-    char* INPUT_PNGFILE = argValues[1];
 
-    // char* INPUT_PNGFILE =
-    //     strdup(INPUT_PNGFILE.c_str());
+    // Get wrapped PNG file for the Icon.
+    char* INPUT_PNGFILE = argValues[1];
     mIconWrapper = new xPngWrapper(INPUT_PNGFILE);
     if (mIconWrapper->hasErrorStatus()) {
         cout << COLOR_RED << endl << "xIconWindow: " <<
@@ -65,7 +62,6 @@ int main(int argCount, char** argValues) {
             COLOR_NORMAL << endl;
         return true;
     }
-
 
     // Open X11 display, ensure it's available.
     mDisplay = XOpenDisplay(NULL);

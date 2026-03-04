@@ -23,6 +23,7 @@ CC = g++
 X11_CFLAGS = `pkg-config --cflags x11`
 X11_LFLAGS = `pkg-config --libs x11 libpng`
 
+
 # ****************************************************
 # make
 #
@@ -87,7 +88,7 @@ run:
 	@echo "$(COLOR_BLUE)Run Starts.$(COLOR_NORMAL)"
 	@echo
 
-	@./xIconWindow test.png
+	./xIconWindow test.png
 
 	@echo
 	@echo "$(COLOR_BLUE)Run Done.$(COLOR_NORMAL)"
