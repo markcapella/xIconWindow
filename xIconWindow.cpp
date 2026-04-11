@@ -113,23 +113,22 @@ int main(int argCount, char** argValues) {
         WINDOW_RECT.x, WINDOW_RECT.y);
 
     // Select observable x11 events & client messages.
-    XSelectInput(mDisplay, mIconWindow, ExposureMask);
-    Atom mDeleteMessage = XInternAtom(mDisplay,
-        "WM_DELETE_WINDOW", False);
-    XSetWMProtocols(mDisplay, mIconWindow,
-        &mDeleteMessage, 1);
+    XSelectInput(mDisplay, mIconWindow,
+        ExposureMask);
 
     // Loop until close event frees us.
+    Atom CLOSE_EVENT = XInternAtom(mDisplay,
+        "WM_DELETE_WINDOW", False);
+    XSetWMProtocols(mDisplay, mIconWindow, &CLOSE_EVENT, 1);
+
     bool msgboxActive = true;
     while (msgboxActive) {
         XEvent event;
         XNextEvent(mDisplay, &event);
         if (event.type == ClientMessage) {
-            if (event.xclient.data.l[0] ==
-                mDeleteMessage) {
+            if (event.xclient.data.l[0] == CLOSE_EVENT) {
                 msgboxActive = false;
             }
-            break;
         }
     }
 
